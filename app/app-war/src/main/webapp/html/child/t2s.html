@@ -10,8 +10,15 @@
 </head>
 <body>
 	<script>
-		var msg = new SpeechSynthesisUtterance('Hello World');
-		window.speechSynthesis.speak(msg);
+		if ('speechSynthesis' in window) {
+			// Synthesis support. Make your web apps talk!
+			var msg = new SpeechSynthesisUtterance('Hello World');
+			window.speechSynthesis.speak(msg);
+		}
+
+		if ('SpeechRecognition' in window) {
+			// Speech recognition support. Talk to your apps!
+		}
 	</script>
 
 
