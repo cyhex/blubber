@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>Text to Speech example</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	<script>
+		if ('speechSynthesis' in window) {
+			// Synthesis support. Make your web apps talk!
+			var msg = new SpeechSynthesisUtterance('Hello World');
+			window.speechSynthesis.speak(msg);
+		}
+
+		if ('SpeechRecognition' in window) {
+			// Speech recognition support. Talk to your apps!
+		}
+	</script>
+
+
+</body>
+</html>
