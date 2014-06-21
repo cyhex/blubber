@@ -12,12 +12,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>task</servlet-name>
+        <servlet-name>parent-task</servlet-name>
         <servlet-class>com.b14h.controllers.parent.TaskServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>task</servlet-name>
-        <url-pattern>/api/task</url-pattern>
+        <servlet-name>parent-task</servlet-name>
+        <url-pattern>/api/parent/task</url-pattern>
     </servlet-mapping>
 
     <servlet>
