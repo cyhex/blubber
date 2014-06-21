@@ -10,9 +10,10 @@ import com.googlecode.objectify.annotation.Id;
 public class Child {
     private static Child inst;
 
-    private int blubs;
     @Id
     private Long childId;
+    private int blubs;
+    private boolean notification = false;
 
     private Child() {
         this.blubs = 0;
@@ -24,6 +25,14 @@ public class Child {
             inst.setChildId((long) 1);
         }
         return inst;
+    }
+
+    public boolean isNotification() {
+        return notification;
+    }
+
+    public void setNotification(boolean notification) {
+        this.notification = notification;
     }
 
     public int getBlubs() {
