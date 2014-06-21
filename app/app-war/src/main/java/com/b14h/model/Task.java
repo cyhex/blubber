@@ -22,6 +22,7 @@ public class Task {
         this.title = title;
         this.description = description;
         this.credit = credit;
+        this.status = TaskStatus.OPEN;
     }
 
     public Long getTaskId() {
