@@ -36,11 +36,19 @@ public class PayServlet extends HttpServlet {
 		int blubs = Integer.parseInt(req.getParameter("unit_price"));
 		int unitCount = Integer.parseInt(req.getParameter("unit_count"));
 		String recipient = req.getParameter("recipient");
-		
+
+		int totalBlubs = blubs * unitCount;
 		double totalEur = BlubConverter.toEur(blubs * unitCount);
 
+		// DEBUG CODE / SECURE PRESENTATION CODE:
+		int presentBlubs = Child.getInstance().getBlubs();
+		if (presentBlubs < totalBlubs) {
+			Child.getInstance().setBlubs(totalBlubs + 1);
+		}
+
 		try {
-			BalanceService.payStore(Store.getInstance(), Child.getInstance(), blubs);
+			BalanceService.payStore(Store.getInstance(), Child.getInstance(),
+					totalBlubs);
 			PayService.pay(recipient, totalEur, productName);
 			resp.getWriter().write("payment executed!");
 		} catch (Exception e) {
