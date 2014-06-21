@@ -19,6 +19,7 @@ var Child = {
     // cache and compile template
     taskTemplate: _.template($("#taskItem").html()),
     indicatorTemplate: _.template($("#indicatorItem").html()),
+
     // REST end point
     endpoint: '/api/child/task',
     endpointNotifications: '/api/notification',
@@ -69,14 +70,14 @@ var Child = {
            
             var task = tasks[i];
              if(i == 0){
-                task.active=true;
-            }
-            else {
-                task.active=false;
+                task.itemClass="active";
+            }else {
+                task.itemClass="";
             }
             var taskDom = Child.taskTemplate({task:task});
             var indicator = Child.indicatorTemplate({data:i});
-            $("#tasksCollection").append(taskDom);
+            $(".carousel-inner").append(taskDom);
+
             $("#indicators").append(indicator);
         }
     },
