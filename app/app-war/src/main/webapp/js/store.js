@@ -30,6 +30,7 @@ var Store = {
             if(product){
                 $("#name").val(decodeURIComponent(product.productname));
                 $("#img").attr('src',decodeURIComponent(product.imageurl));
+                $("#imgurl").val(decodeURIComponent(product.imageurl));
                 $("#img").show();
             }
         });
