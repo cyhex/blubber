@@ -2,6 +2,7 @@ package com.b14h.model;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 /**
  * @author aabarb
@@ -13,6 +14,7 @@ public class Task {
     private String title;
     private String description;
     private int credit;
+    @Index
     private TaskStatus status;
 
     public Task() {
