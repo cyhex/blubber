@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.b14h.libs.BlubConverter;
+import com.b14h.model.Child;
+import com.b14h.model.Store;
+import com.b14h.services.BalanceService;
 import com.b14h.services.PayService;
 
 public class PayServlet extends HttpServlet {
@@ -27,8 +31,28 @@ public class PayServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		PayService.pay();
-		
-		resp.getWriter().write("payment executed!");
+
+		String productName = req.getParameter("taskId");
+		int blubs = Integer.parseInt(req.getParameter("unit_price"));
+		int unitCount = Integer.parseInt(req.getParameter("unit_count"));
+		String recipient = req.getParameter("recipient");
+
+		int totalBlubs = blubs * unitCount;
+		double totalEur = BlubConverter.toEur(blubs * unitCount);
+
+		// DEBUG CODE / SECURE PRESENTATION CODE:
+		int presentBlubs = Child.getInstance().getBlubs();
+		if (presentBlubs < totalBlubs) {
+			Child.getInstance().setBlubs(totalBlubs + 1);
+		}
+
+		try {
+			BalanceService.payStore(Store.getInstance(), Child.getInstance(),
+					totalBlubs);
+			PayService.pay(recipient, totalEur, productName);
+			resp.getWriter().write("payment executed!");
+		} catch (Exception e) {
+			resp.getWriter().write("payment not executed! because: " + e);
+		}
 	}
 }
