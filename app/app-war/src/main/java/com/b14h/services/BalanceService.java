@@ -5,7 +5,7 @@ import com.b14h.model.Parent;
 import com.b14h.model.Store;
 import com.b14h.model.Task;
 
-public class BlanaceService {
+public class BalanceService {
 
     /**
      * Confirm task by Parent write credits to Child

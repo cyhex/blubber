@@ -1,6 +1,8 @@
-package com.b14h.controllers;
+package com.b14h.controllers.Parent;
 
+import com.b14h.model.Child;
 import com.b14h.model.Task;
+import com.b14h.services.BalanceService;
 import com.b14h.services.DbService;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -51,9 +53,8 @@ public class TaskServlet extends HttpServlet {
 
         Task task = DbService.ofy().load().type(Task.class).id(taskId).now();
 
-        task.setStatus(Task.TaskStatus.valueOf(req.getParameter("status")));
+        BalanceService.confirmTask(task, Child.getInstance());
         DbService.ofy().save().entities(task).now();
-
         resp.setStatus(HttpServletResponse.SC_OK);
 
     }
