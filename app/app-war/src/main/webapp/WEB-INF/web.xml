@@ -21,6 +21,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>blubs</servlet-name>
+        <servlet-class>com.b14h.controllers.child.BlubServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>blubs</servlet-name>
+        <url-pattern>/api/child/blub</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>parentTask</servlet-name>
         <servlet-class>com.b14h.controllers.parent.TaskServlet</servlet-class>
     </servlet>
