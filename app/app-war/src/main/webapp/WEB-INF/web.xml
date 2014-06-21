@@ -47,6 +47,15 @@
         <url-pattern>/api/notification</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>upc</servlet-name>
+        <servlet-class>com.b14h.controllers.UpcServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>upc</servlet-name>
+        <url-pattern>/api/upc</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>ObjectifyFilter</filter-name>
         <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
