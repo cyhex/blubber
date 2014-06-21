@@ -59,7 +59,7 @@ var Child = {
          }
          });
          */
-        var json = '[{"key":{"kind":"Task","id":4613069753810944},"propertyMap":{"title":"my Task title 5","description":"Compiles JavaScript templates"}}, {"key":{"kind":"Task","id":4713069753810944},"propertyMap":{"title":"my Task title 4","description":"Compiles JavaScript templates"}}]' ;
+        var json = '[{"key":{"kind":"Task","id":4613069753810944},"propertyMap":{"title":"my Task title 5","description":"Compiles JavaScript templates"}}, {"key":{"kind":"Task","id":4713069753810944},"propertyMap":{"title":"my Task title 4","description":"Compiles JavaScript templates"}}, {"key":{"kind":"Task","id":4713069753810944},"propertyMap":{"title":"my Task title 4","description":"Compiles JavaScript templates"}}]' ;
         
         var tasks = JSON.parse(json);
         var id = tasks[0].key.id;
@@ -69,13 +69,18 @@ var Child = {
         for (var i in tasks) {
            
             var task = tasks[i];
+            var data = {};
+            data.i = i;
              if(i == 0){
                 task.itemClass="active";
+                data.class = "active";
             }else {
                 task.itemClass="";
+                data.class="";
             }
             var taskDom = Child.taskTemplate({task:task});
-            var indicator = Child.indicatorTemplate({data:i});
+            var indicator = Child.indicatorTemplate({data:data});
+            console.log(indicator);
             $(".carousel-inner").append(taskDom);
 
             $("#indicators").append(indicator);

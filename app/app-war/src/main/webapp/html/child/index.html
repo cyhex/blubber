@@ -69,10 +69,8 @@ and open the template in the editor.
     ================================================== -->
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
+            <ol class="carousel-indicators" id="indicators">
+               
             </ol>
             <div class="carousel-inner">
 
@@ -82,7 +80,7 @@ and open the template in the editor.
         </div><!-- /.carousel -->
 
         <script type="text/template" id="indicatorItem">
-            <li data-target="#myCarousel" data-slide-to="<%= data.i %>" class="indicator"></li>
+            <li data-target="#myCarousel" data-slide-to="<%= data.i %>" class="indicator <%= data.class %>"></li>
         </script>
 
         <script type="text/template" id="taskItem">
