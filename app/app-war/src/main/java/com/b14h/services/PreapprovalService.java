@@ -5,9 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
+import com.b14h.model.Parent;
 import com.paypal.exception.ClientActionRequiredException;
 import com.paypal.exception.HttpErrorException;
 import com.paypal.exception.InvalidCredentialException;
@@ -26,8 +24,6 @@ public class PreapprovalService {
 	private static final String CURRENCY_CODE = "EUR";
 	private static final String REDIRECT_URL_SUCCEEDED_PREAPPROVAL = "http://localhost:8080/html/parent/index.html?preapprovalSuccessful=true";
 	private static final String REDIRECT_URL_CANCELED_PREAPPROVAL = "http://localhost:8080/html/parent/index.html";
-	private static final DatastoreService datastore = DatastoreServiceFactory
-			.getDatastoreService();
 
 	public static String preapprove() {
 		AdaptivePaymentsService adaptivePaymentsService = PayPalUtils
@@ -38,20 +34,8 @@ public class PreapprovalService {
 		String preapprovalKey = execute(adaptivePaymentsService,
 				preapprovalRequest);
 
-		store(preapprovalKey);
+		Parent.getInstance().setPreapprovalKey(preapprovalKey);
 		return preapprovalKey;
-	}
-
-	/**
-	 * TODO: this is a workaround implementation to store/load the preapproval
-	 * key in our datastore. a better store architecture is required.
-	 */
-	private static void store(String preapprovalKey) {
-		// store the preapproval key
-		// TODO: temp solution until data models are implemented:
-		Entity keyEntity = new Entity("preapprovalKey");
-		keyEntity.setProperty("key", preapprovalKey);
-		datastore.put(keyEntity);
 	}
 
 	private static String execute(

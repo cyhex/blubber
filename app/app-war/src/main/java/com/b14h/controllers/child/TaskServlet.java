@@ -28,9 +28,6 @@ public class TaskServlet extends HttpServlet {
 
 		List<Task> tasks = DbService.ofy().load().type(Task.class)
 				.filter("status ==", TaskStatus.OPEN).list();
-		List<Task> tasks2 = DbService.ofy().load().type(Task.class)
-				.filter("credit", 50).list();
-		DbService.ofy().load().type(Task.class).list();
 		Gson json = new Gson();
 		resp.setContentType("application/json; charset=UTF-8");
 		resp.getWriter().write(json.toJson(tasks));
