@@ -1,5 +1,6 @@
 package com.b14h.controllers;
 
+import static com.b14h.libs.Constants.ROLES;
 import com.b14h.services.NotificationService;
 import com.google.gson.Gson;
 
@@ -17,9 +18,18 @@ public class NotificationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String role = req.getParameter("role");
-        if(role == "store"){
+        ROLES role = ROLES.valueOf(req.getParameter("role"));
+
+        if (role == ROLES.STORE) {
             resp.getWriter().write(json.toJson(NotificationService.getStore()));
+        }
+
+        if (role == ROLES.PARENT) {
+            resp.getWriter().write(json.toJson(NotificationService.getParent()));
+        }
+
+        if (role == ROLES.CHILD) {
+            resp.getWriter().write(json.toJson(NotificationService.getChild()));
         }
 
     }

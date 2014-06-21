@@ -38,6 +38,14 @@
         <url-pattern>/api/pay</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>notfication</servlet-name>
+        <servlet-class>com.b14h.controllers.NotificationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>notfication</servlet-name>
+        <url-pattern>/api/notfication</url-pattern>
+    </servlet-mapping>
 
     <filter>
         <filter-name>ObjectifyFilter</filter-name>
