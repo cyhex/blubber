@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Store app</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="panel panel-default panel-info" style="display: none" id="qrCodePanel">
+        <div class="panel-heading">Qr Code</div>
+        <div class="panel-body text-center">
+            <div id="qrcode"></div>
+        </div>
+    </div>
+
+    <div class="panel panel-default panel-info" id="newPaymentOrderPanel">
+        <div class="panel-heading">Create new payment order</div>
+        <div class="panel-body">
+            <form role="form" id="newPaymentOrderForm">
+                <div class="form-group">
+                    <label for="name">Article name</label>
+                    <input type="text" class="form-control" name="name" id="name"
+                           placeholder="Item name">
+                </div>
+
+                <div class="form-group">
+                    <label for="unit_price">Unit price</label>
+                    <input type="number" class="form-control" name="unit_price" id="unit_price"
+                           placeholder="Unit price">
+                </div>
+
+                <div class="form-group">
+                    <label for="unit_price">Unit count</label>
+                    <input type="number" class="form-control" name="unit_count" id="unit_count"
+                           placeholder="Unit count">
+                </div>
+                <input type="hidden" name="recipient" value="store@paypal.de">
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../js/jquery-2.1.1.min.js"></script>
+    <script src="../../js/jquery.qrcode.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#newPaymentOrderForm").submit(function (e) {
+                e.preventDefault();
+                $('#qrcode').html("");
+                $('#qrcode').qrcode($(this).serialize());
+                $('#qrCodePanel').slideDown();
+
+            });
+        });
+    </script>
+</body>
+</html>
