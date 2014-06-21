@@ -10,39 +10,51 @@
 </head>
 <body>
     <div class="container">
+
         <div class="panel panel-default panel-info">
             <div class="panel-heading">Confirm Payment</div>
             <div class="panel-body">
-                <div id="paymentData" class="container"></div>
-                <div class="btn-group">
-                    <a class="btn btn-default" href="index.html">Cancel</a>
-                    <button class="btn btn-info">Confirm Payment</button>
-                </div>
+                <form method="get" action="/api/pay">
+                    <div id="paymentData" class="container"></div>
+
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="index.html">Cancel</a>
+                        <button class="btn btn-info" type="submit">Confirm Payment</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
 
     <script type="text/template" id="tempalte">
-
+        <% if(imgurl) {%>
+        <div class="row text-center">
+            <img src="<%= imgurl %>">
+        </div>
+        <%  } %>
         <div class="row">
-            <div class="col-xs-6"><b>Recipient name</b></div>
-            <div class="col-xs-6"> <%= name.replace(/\+/g,' ')%></b></div>
+            <div class="col-xs-6"><b>Product name</b></div>
+            <div class="col-xs-6"> <%= name.replace(/\+/g,' ')%></div>
+            <input type="hidden" name="name" value="<%= name.replace(/\+/g,' ')%>">
         </div>
 
         <div class="row">
             <div class="col-xs-6"><b>Unit price</b></div>
-            <div class="col-xs-6"> <%=unit_price%></b></div>
+            <div class="col-xs-6"> <%=unit_price%></div>
+            <input type="hidden" name="unit_price" value="<%=unit_price%>">
         </div>
 
         <div class="row">
             <div class="col-xs-6"><b>Unit count</b></div>
-            <div class="col-xs-6"> <%=unit_count%></b></div>
+            <div class="col-xs-6"> <%=unit_count%></div>
+            <input type="hidden" name="unit_count" value="<%=unit_count%>">
         </div>
 
         <div class="row form-group">
             <div class="col-xs-6"><b>Recipient</b></div>
-            <div class="col-xs-6"> <%=recipient%></b></div>
+            <div class="col-xs-6"> <%=recipient%></div>
+            <input type="hidden" name="recipient" value="<%=recipient%>">
         </div>
 
     </script>
