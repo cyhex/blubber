@@ -17,7 +17,10 @@ public class UpcServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String upc = req.getParameter("upc");
-        resp.getWriter().write(UpcService.search(upc));
+        if(upc != null){
+            resp.setContentType("application/json; charset=UTF-8");
+            resp.getWriter().write(UpcService.search(upc));
+        }
     }
 
 

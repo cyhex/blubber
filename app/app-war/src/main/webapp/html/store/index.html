@@ -20,6 +20,9 @@
         <div class="panel-heading">Create new payment order</div>
         <div class="panel-body">
             <form role="form" id="newPaymentOrderForm">
+                <div class="text-center row" >
+                    <img src="" id="img" style="display: none">
+                </div>
                 <div class="form-group">
                     <label for="name">Article name</label>
                     <input type="text" class="form-control" name="name" id="name"
@@ -34,7 +37,8 @@
 
                 <div class="form-group">
                     <label for="unit_price">Unit count</label>
-                    <input type="number" class="form-control" name="unit_count" id="unit_count"
+                    <input type="number" class="form-control" value="1" name="unit_count"
+                           id="unit_count"
                            placeholder="Unit count">
                 </div>
                 <input type="hidden" name="recipient" value="store@paypal.de">

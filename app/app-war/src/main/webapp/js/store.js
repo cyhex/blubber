@@ -16,10 +16,24 @@ var Store = {
         });
 
         $("#scan").attr('href', Store.getScanUrl());
+        Store.loadUpc();
     },
 
     loadUpc : function(){
-        Helpers.parseQuery(window.location.q)
+        var query = Helpers.parseQuery(window.location.search.substring(1));
+        if(!query.upc){
+            return;
+        }
+
+        $.getJSON(Store.endpointUpc, {upc:query.upc}, function(data){
+            var product = data[0];
+            if(product){
+                $("#name").val(decodeURIComponent(product.productname));
+                $("#img").attr('src',decodeURIComponent(product.imageurl));
+                $("#img").show();
+            }
+        });
+
     },
 
     getScanUrl: function(){
