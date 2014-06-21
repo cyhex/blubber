@@ -67,7 +67,7 @@ var Parent = {
     checkNotifications: function () {
         $.getJSON(Parent.endpointNotifications, {'role': Parent.notificationsRole},
             function (data) {
-                if (data == "true") {
+                if (data == true) {
                     Parent.loadTasks();
                 }
                 setTimeout(Parent.checkNotifications, 3000);

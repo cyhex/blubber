@@ -5,98 +5,116 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../css/carousel.css" rel="stylesheet">
-        <link href="../../css/child.css" rel="stylesheet">
-        <style id="holderjs-style" type="text/css"></style>
-    </head>
-    <body>
-        <div class="navbar-wrapper">
-            <div class="container">
-                <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-                    <div class="container">
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<link href="../../css/carousel.css" rel="stylesheet">
+<link href="../../css/child.css" rel="stylesheet">
+<style id="holderjs-style" type="text/css"></style>
+</head>
+<body>
+    <div class="navbar-wrapper">
+        <div class="container">
+            <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+                <div class="container">
 
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">Project name</a>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Project name</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a id="buy" href="">Buy</a></li>
+                            <li><a id="tasks" href="">Tasks</a></li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-neutral ownedBlubs" style="width: 45%">
+                            <span class="sr-only"></span>
                         </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav">
-                                <li><a id="buy" href="">Buy</a></li>
-                                <li><a id="tasks" href="">Tasks</a>  </li>
-                            </ul>
-                        </div><!--/.nav-collapse -->
-
-                        <div class="progress progress-striped active">
-                            <div class="progress-bar progress-bar-success" style="width: 35%">
-                                <span class="sr-only">35% Complete (success)</span>
-                            </div>
-                            <div class="progress-bar progress-bar-warning" style="width: 20%">
-                                <span class="sr-only">20% Complete (warning)</span>
-                            </div>
-                            <div class="progress-bar progress-bar-neutral" style="width: 45%">
-                                <span class="sr-only">45% Complete (danger)</span>
-                            </div>
+                        <div class="progress-bar progress-bar-success unconfirmedBlubs" style="width: 35%">
+                            <span class="sr-only"></span>
+                        </div>
+                        <div class="progress-bar progress-bar-warning nonEarnedBlubs" style="width: 20%">
+                            <span class="sr-only"></span>
                         </div>
                     </div>
-
                 </div>
 
+            </div>
+
+        </div>
+    </div>
+
+    <div id="error" class="alert alert-danger alert-dismissable"
+         style="display: none">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">&times;</button>
+        <span></span>
+    </div>
+    <!-- Carousel
+================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+        <!-- Indicators -->
+        <ol class="carousel-indicators" id="indicators">
+
+        </ol>
+        <div class="carousel-inner">
+
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
+                class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span
+                class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+    <!-- /.carousel -->
+
+    <script type="text/template" id="indicatorItem">
+        <li data-target="#myCarousel" data-slide-to="<%= data.i %>"
+            class="indicator <%= data.class %>"></li>
+    </script>
+
+    <script type="text/template" id="taskItem">
+        <div class="item <%= task.itemClass %>">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1><%= task.title %></h1>
+
+                    <p><%= task.description %></p>
+
+                    <p><a class="btn btn-lg btn-primary updateState"
+                          data-id="<%= task.taskId %>"
+                          data-state="CLOSED"
+                          href="#" role="button">Done</a>
+                    </p>
+                </div>
             </div>
         </div>
+    </script>
 
-        <!-- Carousel
+    <!-- Bootstrap core JavaScript
     ================================================== -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-            <!-- Indicators -->
-            <ol class="carousel-indicators" id="indicators">
-               
-            </ol>
-            <div class="carousel-inner">
-
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-        </div><!-- /.carousel -->
-
-        <script type="text/template" id="indicatorItem">
-            <li data-target="#myCarousel" data-slide-to="<%= data.i %>" class="indicator <%= data.class %>"></li>
-        </script>
-
-        <script type="text/template" id="taskItem">
-                <div class="item <%= task.itemClass %>">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1><%= task.propertyMap.title %></h1>
-                            <p><%= task.propertyMap.description %></p>
-                            <p><a class="btn btn-lg btn-primary updateState" href="#" role="button">Done</a></p>
-                        </div>
-                    </div>
-                </div>
-        </script>
-
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="../../js/jquery-2.1.1.min.js"></script>
-        <script src="../../js/bootstrap.min.js"></script>
-        <script src="../../js/underscore-min.js"></script>
-        <script src="../../js/docs.min.js"></script>
-        <script src="../../js/child.js"></script>
-        <script>
-            $(document).ready(function() {
-                Child.init();
-                Child.loadTasks();
-            });
-        </script>
-    </body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../js/jquery-2.1.1.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/underscore-min.js"></script>
+    <script src="../../js/docs.min.js"></script>
+    <script src="../../js/child.js"></script>
+    <script>
+        $(document).ready(function () {
+            Child.init();
+            Child.loadTasks();
+        });
+    </script>
+</body>
 </html>
