@@ -30,10 +30,10 @@ public class PayService {
 	private static final DatastoreService datastore = DatastoreServiceFactory
 			.getDatastoreService();
 
-	public static void pay() {
+	public static void pay(String receiverMail, double amountEur, String memo) {
 		String preapprovalKey = fetchPreapprovalKey();
 
-		PayRequest payRequest = createPayRequest(preapprovalKey);
+		PayRequest payRequest = createPayRequest(preapprovalKey, receiverMail, amountEur, memo);
 
 		AdaptivePaymentsService adaptivePaymentsService = PayPalUtils
 				.getAdaptivePaymentsService();
@@ -41,19 +41,21 @@ public class PayService {
 		execute(payRequest, adaptivePaymentsService);
 	}
 
-	private static PayRequest createPayRequest(String preapprovalKey) {
+	private static PayRequest createPayRequest(String preapprovalKey,
+			String receiverMail, double amountEur, String memo) {
 		RequestEnvelope env = new RequestEnvelope();
 		env.setErrorLanguage("en_US");
 
 		List<Receiver> receiver = new ArrayList<Receiver>();
 		Receiver rec = new Receiver();
-		rec.setAmount(2.0);
-		rec.setEmail(STATIC_STORE_PAYPAL_ID);
+		rec.setAmount(amountEur);
+		rec.setEmail(receiverMail);
 		receiver.add(rec);
 		ReceiverList receiverlst = new ReceiverList(receiver);
-		
+
 		PayRequest payRequest = new PayRequest();
 		payRequest.setActionType("PAY");
+		payRequest.setMemo(memo);
 		payRequest.setReceiverList(receiverlst);
 		payRequest.setCurrencyCode(CURRENCY_CODE);
 		payRequest.setCancelUrl("http://www.notUsedButRequiredUrl.de/");
