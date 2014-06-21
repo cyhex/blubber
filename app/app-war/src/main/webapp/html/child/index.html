@@ -67,30 +67,36 @@ and open the template in the editor.
 
         <!-- Carousel
         ================================================== -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
             <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="3" class=""></li>
-            </ol>
+            <ol class="carousel-indicators" id="indicators"></ol>
+                <script type="text/template" id="indicatorItem">
+                <li data-target="#myCarousel" data-slide-to="<%= data.i %>" class="indicator"></li>
+                </script>
+           
 
-            <div class="carousel-inner">
-                <div id="tasksCollection"></div>
+            <div class="carousel-inner" id="tasksCollection">
+              
                 <script type="text/template" id="taskItem">
-                <div class="item">
+             <%if (task.active) { %>
+               <div class="item active">
+               <% } else { %>
+                  <div class="item">         
+               <% }%>
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1><%= title %></h1>
-                            <p><%= description %></p>
-                     <p><a class="btn btn-lg btn-primary" href="#" role="button">Done</a></p>
+                            <h1><%= task.propertyMap.title %></h1>
+                            <p><%= task.propertyMap.description %>                         
+                           
+                        </p>
+                     <p><a class="btn btn-lg btn-primary updateState" href="#" role="button">Done</a></p>
                         </div>
                     </div>
                 </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            
                 </script>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
             </div><!-- /.carousel -->
 
         </div>
@@ -100,11 +106,17 @@ and open the template in the editor.
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="../../js/jquery-2.1.1.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
         <script src="../../js/underscore-min.js"></script>
         <script src="../../js/docs.min.js"></script>
         <script src="../../js/child.js"></script>
-
+        <script>
+            $(document).ready(function() {
+                console.log("here child html");
+                Child.init();
+                Child.loadTasks();
+            });
+        </script>
     </body>
 </html>
