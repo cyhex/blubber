@@ -1,0 +1,10 @@
+.panel-top-fixed{
+    position: fixed;
+    top: 0px;
+    z-index: 900;
+    width: 100%;
+}
+
+.body-panel-top{
+    padding-top: 70px;
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+    <servlet>
+        <servlet-name>populate</servlet-name>
+        <servlet-class>com.b14h.controllers.PopulateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>populate</servlet-name>
+        <url-pattern>/api/populate</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>task</servlet-name>
+        <servlet-class>com.b14h.controllers.TaskServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>task</servlet-name>
+        <url-pattern>/api/task</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>preapproval</servlet-name>
+        <servlet-class>com.b14h.controllers.PreapprovalServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>preapproval</servlet-name>
+        <url-pattern>/api/preapproval</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>pay</servlet-name>
+        <servlet-class>com.b14h.controllers.PayServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>pay</servlet-name>
+        <url-pattern>/api/pay</url-pattern>
+    </servlet-mapping>
+
+
+    <filter>
+        <filter-name>ObjectifyFilter</filter-name>
+        <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ObjectifyFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+</web-app>
