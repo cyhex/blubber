@@ -35,11 +35,6 @@ public class NotificationTest {
     @Before
     public void setUp() throws Exception {
         helper.setUp();
-
-        Store store = Store.getInstance();
-        store.setNotification(true);
-        DbService.ofy().save().entity(store).now();
-
         parameters = new HashMap<String, String>();
         parameters.put("role","STORE");
         servlet = new NotificationServlet();
@@ -62,6 +57,10 @@ public class NotificationTest {
 
     @Test
     public void testGetNotification() throws Exception {
+        Store store = Store.getInstance();
+        store.setNotification(true);
+        DbService.ofy().save().entity(store).now();
+
         servlet.doGet(request, response);
         String expected = "true";
         Assert.assertEquals(expected, response_writer.toString());

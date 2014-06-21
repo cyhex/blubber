@@ -13,7 +13,7 @@
 
     <servlet>
         <servlet-name>task</servlet-name>
-        <servlet-class>com.b14h.controllers.Parent.TaskServlet</servlet-class>
+        <servlet-class>com.b14h.controllers.parent.TaskServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>task</servlet-name>

@@ -8,7 +8,7 @@ import com.b14h.model.Task;
 public class BalanceService {
 
     /**
-     * Confirm task by Parent write credits to Child
+     * Confirm task by parent write credits to Child
      *
      * @param task
      * @param child

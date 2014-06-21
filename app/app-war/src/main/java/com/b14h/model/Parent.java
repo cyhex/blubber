@@ -6,7 +6,7 @@ import com.googlecode.objectify.annotation.Id;
 /**
  * @author aabarb
  */
-@Entity(name = "Parent")
+@Entity(name = "parent")
 public class Parent {
     private static Parent inst;
 

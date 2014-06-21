@@ -1,4 +1,4 @@
-package com.b14h.controllers.Parent;
+package com.b14h.controllers.parent;
 
 import com.b14h.model.Child;
 import com.b14h.model.Task;

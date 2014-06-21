@@ -1,5 +1,6 @@
 package com.b14h.model;
 
+import com.b14h.services.DbService;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -8,7 +9,6 @@ import com.googlecode.objectify.annotation.Id;
  */
 @Entity(name = "store")
 public class Store {
-    private static Store inst;
 
     @Id
     private Long storeId;
@@ -16,9 +16,11 @@ public class Store {
     private boolean notification = false;
 
     public static Store getInstance() {
-        if (inst == null) {
-            inst = new Store();
-            inst.setStoreId((long) 1);
+        Store inst = DbService.ofy().load().type(Store.class).id(1).now();
+        if(inst == null){
+           inst = new Store();
+           inst.setStoreId((long) 1);
+           DbService.ofy().save().entities(inst).now();
         }
         return inst;
     }
