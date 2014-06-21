@@ -12,11 +12,20 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>parent-task</servlet-name>
+        <servlet-name>childTask</servlet-name>
+        <servlet-class>com.b14h.controllers.child.TaskServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>childTask</servlet-name>
+        <url-pattern>/api/child/task</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>parentTask</servlet-name>
         <servlet-class>com.b14h.controllers.parent.TaskServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>parent-task</servlet-name>
+        <servlet-name>parentTask</servlet-name>
         <url-pattern>/api/parent/task</url-pattern>
     </servlet-mapping>
 
@@ -45,6 +54,15 @@
     <servlet-mapping>
         <servlet-name>notification</servlet-name>
         <url-pattern>/api/notification</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>upc</servlet-name>
+        <servlet-class>com.b14h.controllers.UpcServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>upc</servlet-name>
+        <url-pattern>/api/upc</url-pattern>
     </servlet-mapping>
 
     <filter>
