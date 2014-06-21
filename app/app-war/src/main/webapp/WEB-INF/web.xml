@@ -39,12 +39,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>notfication</servlet-name>
+        <servlet-name>notification</servlet-name>
         <servlet-class>com.b14h.controllers.NotificationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>notfication</servlet-name>
-        <url-pattern>/api/notfication</url-pattern>
+        <servlet-name>notification</servlet-name>
+        <url-pattern>/api/notification</url-pattern>
     </servlet-mapping>
 
     <filter>
