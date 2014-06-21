@@ -8,3 +8,11 @@
 .body-panel-top{
     padding-top: 70px;
 }
+
+.a-black{
+    color: #000000;
+}
+.a-black:hover{
+    color: #000000;
+    text-decoration: none;
+}
