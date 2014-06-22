@@ -10,20 +10,6 @@
 </head>
 <body class="">
 
-	<!-- navigation header -->
-	<!-- 
-	<div class="panel panel-success panel-top-fixed">
-		<ul class="nav nav-pills">
-			<li><a id="taskFormTg" href="#">New Task</a></li>
-			<li><a id="populateTasks" href="/api/populate">Generate
-					tasks</a></li>
-			<li id="preapprovalListItem"><a id="preapproval"
-				href="../../api/preapproval"><span
-					class="glyphicon glyphicon-exclamation-sign"></span>Authorize
-					paypal</a></li>
-		</ul>
-	</div>
-	 -->
 
 	<!--  ##### BOOTSTRAP NAVBAR STARTS HERE ###### -->
 
@@ -102,7 +88,7 @@
 	<div id="tasksCollection" class="container"></div>
 
 	<script type="text/template" id="taskRow">
-        <div class="row">
+        <div class="row <%=status%> status">
             <div class="col-xs-8">
                 <% if(status == "CONFIRMED") {%>
                     <span class="glyphicon glyphicon-ok text-success"></span>
@@ -120,12 +106,12 @@
                 </span>
             </div>
         </div>
-        <div class="row">
+        <div class="row <%=status%> status">
             <div class="col-xs-12">
                 <p class="text-muted"><%= description %></p>
             </div>
         </div>
-        <div class="row">
+        <div class="row <%=status%> status">
             <div class="col-xs-12">
                 <div class="btn-group text-right">
                     <button data-id="<%= taskId %>" data-state="CONFIRMED" type="button"
