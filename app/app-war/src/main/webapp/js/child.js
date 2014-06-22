@@ -26,6 +26,8 @@ var Child = {
         Child.setBuyUrl();
         Child.loadBlubs();
 
+        $(document).on('click', '.speak', Child.speak);
+
         setTimeout(Child.checkNotifications, 3000);
     },
     setBuyUrl: function () {
@@ -101,10 +103,28 @@ var Child = {
             error: Child.reqError
         });
     },
+
+    speak: function(e){
+
+        var title = $(e.target).parent().parent().siblings('.title').html();
+        var description = $(e.target).parent().parent().siblings('.description').html();
+
+        if ('speechSynthesis' in window) {
+            // Synthesis support. Make your web apps talk!
+            var msg = new SpeechSynthesisUtterance(title);
+            window.speechSynthesis.speak(msg);
+
+            var msg = new SpeechSynthesisUtterance(description);
+            window.speechSynthesis.speak(msg);
+        }
+    },
+
     reqError: function (xhr, status, error) {
         Child.errorTemplate.children('span').html(xhr.responseText);
         Child.errorTemplate.show();
     }
+
+
 
 };
 
