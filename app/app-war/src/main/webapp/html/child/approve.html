@@ -72,9 +72,16 @@
             <img class="img-circle" src="<%= imgurl %>">
             </div>
             <%  } %>
+            <br/>
             <div class="row">
 
-           <div class="col-xs-12 bg-primary"><strong> <%=unit_count%> X </strong><%= name.replace(/\+/g,' ')%></div>
+           <div class="col-xs-12 ">
+           <div class="panel panel-success">
+                <div class="panel-heading">
+                     <strong> <%=unit_count%> X </strong><%= name.replace(/\+/g,' ')%>\n\
+                </div>
+            </div>          
+           </div>
             <input type="hidden" name="name" value="<%= name.replace(/\+/g,' ')%>">
             </div>
 
