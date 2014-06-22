@@ -8,18 +8,60 @@
 <link rel="stylesheet" href="../../css/bootstrap.min.css">
 <link rel="stylesheet" href="../../css/main.css">
 </head>
-<body class="body-panel-top">
+<body class="">
 
 	<!-- navigation header -->
+	<!-- 
 	<div class="panel panel-success panel-top-fixed">
 		<ul class="nav nav-pills">
 			<li><a id="taskFormTg" href="#">New Task</a></li>
 			<li><a id="populateTasks" href="/api/populate">Generate
 					tasks</a></li>
-			<li id="preapprovalListItem"><a id="preapproval" href="../../api/preapproval"><span
-					class="glyphicon glyphicon-exclamation-sign"></span>Authorize paypal</a></li>
+			<li id="preapprovalListItem"><a id="preapproval"
+				href="../../api/preapproval"><span
+					class="glyphicon glyphicon-exclamation-sign"></span>Authorize
+					paypal</a></li>
 		</ul>
 	</div>
+	 -->
+
+	<!--  ##### BOOTSTRAP NAVBAR STARTS HERE ###### -->
+
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Blubber</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a id="taskFormTg" href="#">New Task</a></li>
+					<li><a id="populateTasks" href="/api/populate">Generate
+							Tasks</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li id="preapprovalListItem"><a id="preapproval"
+						href="../../api/preapproval"><span
+							class="glyphicon glyphicon-exclamation-sign"></span>Authorize
+							paypal</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+	<!--  ##### BOOTSTRAP NAVBAR ENDS HERE ###### -->
+
 	<div id="error" class="alert alert-danger alert-dismissable"
 		style="display: none">
 		<button type="button" class="close" data-dismiss="alert"
@@ -27,10 +69,10 @@
 		<span></span>
 	</div>
 
-	<div class="panel panel-default panel-info" style="display: none;"
+	<div class="panel panel-default panel-info" style="display: none; margin: 20px;"
 		id="newTaskFormPanel">
 		<div class="panel-heading">Create new task</div>
-		<div class="panel-body">
+		<div class="panel-footer panel-primary">
 			<form role="form" id="newTaskForm" method="post">
 				<div class="form-group">
 					<label for="title">Title</label> <input type="text"
@@ -73,7 +115,7 @@
                 <b><%= title %></b>
             </div>
             <div class="col-xs-4 text-right">
-                <span class="text-muted">Credits
+                <span class="text-muted">Blubs
                     <span class="label label-info"><%= credit %></span>
                 </span>
             </div>
@@ -87,11 +129,11 @@
             <div class="col-xs-12">
                 <div class="btn-group text-right">
                     <button data-id="<%= taskId %>" data-state="CONFIRMED" type="button"
-                            class="updateState btn btn-default">
-                        Confirm
+                            class="updateState btn btn-primary">
+						<span class="glyphicon glyphicon-thumbs-up"></span> Confirm
                     </button>
-                    <button data-id="<%= taskId %>" type="button" class="delete btn btn-warning">
-                        Delete
+                    <button data-id="<%= taskId %>" type="button" class="delete btn btn-default">
+						<span class="glyphicon glyphicon-trash"></span> Delete
                     </button>
                 </div>
             </div>
