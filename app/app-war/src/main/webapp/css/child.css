@@ -9,12 +9,12 @@ and open the template in the editor.
 */
 
 body { 
-  background: url(../../images/bubbles1.png) no-repeat center center fixed; 
+  background: url(../../images/bubbles4.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-color: lightblue;
+  background-color: #88eef4;
   overflow: hidden;
 }
 
