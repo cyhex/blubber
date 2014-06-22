@@ -50,7 +50,7 @@ public class PayServlet extends HttpServlet {
 			BalanceService.payStore(Store.getInstance(), Child.getInstance(),
 					totalBlubs);
 			PayService.pay(recipient, totalEur, productName);
-			resp.getWriter().write("payment executed!");
+            resp.sendRedirect("/html/child/confirmed.html");
 		} catch (Exception e) {
 			resp.getWriter().write("payment not executed! because: " + e);
 		}
