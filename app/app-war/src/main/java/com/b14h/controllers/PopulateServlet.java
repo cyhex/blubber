@@ -15,8 +15,8 @@ public class PopulateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {
         
-        String title = "Clean your room";
-        String desc = "Don't forget to pick up your dirty socks and throw away the garbage. Gather all dirty dishes and put them in the dishwasher.";
+        String title = "Clean";
+        String desc = "Clean your room";
         Task task = new Task(title, desc, 50);
         task.setStatus(Task.TaskStatus.OPEN);
         DbService.ofy().save().entities(task).now();

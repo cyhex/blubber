@@ -61,7 +61,7 @@ var Parent = {
             $('#newTaskFormPanel').hide();
         });
 
-        setTimeout(Parent.checkNotifications, 3000);
+        setTimeout(Parent.checkNotifications, 1000);
     },
 
     checkNotifications: function () {
@@ -70,7 +70,7 @@ var Parent = {
                 if (data == true) {
                     Parent.loadTasks();
                 }
-                setTimeout(Parent.checkNotifications, 3000);
+                setTimeout(Parent.checkNotifications, 1000);
             });
     },
 

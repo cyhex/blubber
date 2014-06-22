@@ -28,7 +28,7 @@ var Child = {
 
         $(document).on('click', '.speak', Child.speak);
 
-        setTimeout(Child.checkNotifications, 3000);
+        setTimeout(Child.checkNotifications, 1000);
     },
     setBuyUrl: function () {
         var callbackUrl = "http://" + window.location.host +
@@ -45,7 +45,7 @@ var Child = {
                 if (data == true) {
                     Child.loadBlubs();
                 }
-                setTimeout(Child.checkNotifications, 3000);
+                setTimeout(Child.checkNotifications, 1000);
             });
     },
     loadBlubs: function () {
