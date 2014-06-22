@@ -1,33 +1,20 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-$(document).ready(function() {
-    console.log("here child.js");
-
-    var callbackUrl = "http://" + window.location.host +
-            "/html/child/approve.html?code={CODE}";
-
-    var buyUrl = "http://zxing.appspot.com/scan?ret=" + encodeURIComponent(callbackUrl);
-
-    $("#buy").attr('href', buyUrl);
-});
-
-
 var Child = {
     // cache and compile template
     taskTemplate: _.template($("#taskItem").html()),
     indicatorTemplate: _.template($("#indicatorItem").html()),
+    errorTemplate: $("#error"),
 
     // REST end point
     endpoint: '/api/child/task',
     endpointNotifications: '/api/notification',
+    endpointBlubs: '/api/child/blub',
     notificationsRole: "CHILD",
-    init: function() {
+
+
+    init: function () {
 
         // set event listeners
-        $(document).on('click', '.updateState', function(e) {
+        $(document).on('click', '.updateState', function (e) {
             e.preventDefault();
 
             var data = {
@@ -36,72 +23,108 @@ var Child = {
             };
             Child.updateTask(data);
         });
+        Child.setBuyUrl();
+        Child.loadBlubs();
+
+        $(document).on('click', '.speak', Child.speak);
 
         setTimeout(Child.checkNotifications, 3000);
     },
-    checkNotifications: function() {
-        $.getJSON(Child.endpointNotifications, {'role': Child.notificationsRole},
-        function(data) {
-            if (data == "true") {
-                Child.loadTasks();
-            }
-            setTimeout(Child.checkNotifications, 3000);
-        });
-    },
-    loadTasks: function loadTasks() {
-        /*$.getJSON(Child.endpoint, function (tasks) {
-         Child.clearTaskContainer();
-         
-         for (var i in tasks) {
-         var task = tasks[i];
-         var taskDom = Child.taskTemplate(task);
-         $("#tasksCollection").append(taskDom);
-         }
-         });
-         */
-        var json = '[{"key":{"kind":"Task","id":4613069753810944},"propertyMap":{"title":"my Task title 5","description":"Compiles JavaScript templates"}}, {"key":{"kind":"Task","id":4713069753810944},"propertyMap":{"title":"my Task title 4","description":"Compiles JavaScript templates"}}, {"key":{"kind":"Task","id":4713069753810944},"propertyMap":{"title":"my Task title 4","description":"Compiles JavaScript templates"}}]' ;
-        
-        var tasks = JSON.parse(json);
-        var id = tasks[0].key.id;
-        
-        console.log(id);
-        console.log(tasks);
-        for (var i in tasks) {
-           
-            var task = tasks[i];
-            var data = {};
-            data.i = i;
-             if(i == 0){
-                task.itemClass="active";
-                data.class = "active";
-            }else {
-                task.itemClass="";
-                data.class="";
-            }
-            var taskDom = Child.taskTemplate({task:task});
-            var indicator = Child.indicatorTemplate({data:data});
-            console.log(indicator);
-            $(".carousel-inner").append(taskDom);
+    setBuyUrl: function () {
+        var callbackUrl = "http://" + window.location.host +
+            "/html/child/approve.html?code={CODE}";
 
-            $("#indicators").append(indicator);
-        }
+        var buyUrl = "http://zxing.appspot.com/scan?ret=" + encodeURIComponent(callbackUrl);
+
+        $("#buy").attr('href', buyUrl);
     },
-    clearTaskContainer: function() {
-        $('#tasksCollection').html("");
+
+    checkNotifications: function () {
+        $.getJSON(Child.endpointNotifications, {'role': Child.notificationsRole},
+            function (data) {
+                if (data == true) {
+                    Child.loadBlubs();
+                }
+                setTimeout(Child.checkNotifications, 3000);
+            });
     },
-    updateTask: function(data) {
+    loadBlubs: function () {
+
+        $.getJSON(Child.endpointBlubs, function (data) {
+            var total = data.nonEarnedBlubs + data.ownedBlubs + data.unconfirmedBlubs;
+            $(".ownedBlubs").attr('style', Child.getWidthStyle(total, data.ownedBlubs));
+            $(".unconfirmedBlubs").attr('style', Child.getWidthStyle(total, data.unconfirmedBlubs));
+            $(".nonEarnedBlubs").attr('style', Child.getWidthStyle(total, data.nonEarnedBlubs));
+
+        });
+
+    },
+
+    getWidthStyle:function(total, val){
+        return "width: " + parseInt((val/total)*100) + "%";
+    },
+
+    loadTasks: function loadTasks() {
+
+        $.getJSON(Child.endpoint, function (tasks) {
+            $(".carousel-inner").html("");
+            $("#indicators").html("");
+
+            for (var i in tasks) {
+
+                var task = tasks[i];
+                var data = {};
+                data.i = i;
+                if (i == 0) {
+                    task.itemClass = "active";
+                    data.class = "active";
+                } else {
+                    task.itemClass = "";
+                    data.class = "";
+                }
+                var taskDom = Child.taskTemplate({task: task});
+                var indicator = Child.indicatorTemplate({data: data});
+
+                $(".carousel-inner").append(taskDom);
+                $("#indicators").append(indicator);
+            }
+        });
+
+    },
+    updateTask: function (data) {
         $.ajax({
             url: Child.endpoint,
             data: data,
             type: 'POST',
-            success: Child.loadTasks,
+            success: function(){
+                Child.loadTasks();
+                Child.loadBlubs();
+            },
             error: Child.reqError
         });
     },
-    reqError: function(xhr, status, error) {
+
+    speak: function(e){
+
+        var title = $(e.target).parent().parent().siblings('.title').html();
+        var description = $(e.target).parent().parent().siblings('.description').html();
+
+        if ('speechSynthesis' in window) {
+            // Synthesis support. Make your web apps talk!
+            var msg = new SpeechSynthesisUtterance(title);
+            window.speechSynthesis.speak(msg);
+
+            var msg = new SpeechSynthesisUtterance(description);
+            window.speechSynthesis.speak(msg);
+        }
+    },
+
+    reqError: function (xhr, status, error) {
         Child.errorTemplate.children('span').html(xhr.responseText);
         Child.errorTemplate.show();
     }
+
+
 
 };
 
