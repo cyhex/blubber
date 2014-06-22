@@ -25,16 +25,29 @@ var Store = {
             return;
         }
 
-        $.getJSON(Store.endpointUpc, {upc:query.upc}, function(data){
-            var product = data[0];
-            if(product){
-                $("#name").val(decodeURIComponent(product.productname));
-                $("#img").attr('src',decodeURIComponent(product.imageurl));
-                $("#imgurl").val(decodeURIComponent(product.imageurl));
-                $("#img").show();
-            }
+        $.ajax({
+            dataType: "json",
+            url: Store.endpointUpc,
+            data: {upc:query.upc},
+            success: function(data){
+                var product = data[0];
+                if(product && product.productname.trim()){
+                    $("#name").val(decodeURIComponent(product.productname));
+                    $("#img").attr('src',decodeURIComponent(product.imageurl));
+                    $("#imgurl").val(decodeURIComponent(product.imageurl));
+                    $("#img").show();
+                }else{
+                    Store.productNotFound();
+                }
+            },
+            error: Store.productNotFound
         });
 
+
+    },
+
+    productNotFound: function(){
+        $("#error").html("Product not found").show();
     },
 
     getScanUrl: function(){
