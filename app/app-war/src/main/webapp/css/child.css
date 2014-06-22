@@ -8,18 +8,15 @@ and open the template in the editor.
     Author     : aabarb
 */
 
-body { 
-  background: url(../../images/bubbles4.png) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-color: #88eef4;
-  overflow: hidden;
+body {
+    background: #666 url(../../images/bubbles4.png) no-repeat fixed center center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    overflow: hidden;
 }
 
 #product {
-    margin-top:120px !important;
+    margin-top: 120px !important;
 }
 
 .carousel-indicators .active {
@@ -29,10 +26,22 @@ body {
 .progress-striped {
     text-align: center;
 }
+
 .progress-striped .progress-bar {
-    margin:auto;
+    margin: auto;
 }
 
 .btn-group {
     text-align: center;
+}
+
+.carousel{
+    position: inherit;
+}
+.carousel-caption h2 {
+    color: #ffffff;
+}
+
+.carousel-caption {
+    bottom: 60px;
 }
