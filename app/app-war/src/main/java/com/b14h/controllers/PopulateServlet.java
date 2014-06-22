@@ -16,25 +16,25 @@ public class PopulateServlet extends HttpServlet {
             IOException {
         
         String title = "Clean your room";
-        String desc = "Don't forget to pick up your dirty socks and throw away the garbage.";
+        String desc = "Don't forget to pick up your dirty socks and throw away the garbage. Gather all dirty dishes and put them in the dishwasher.";
         Task task = new Task(title, desc, 50);
         task.setStatus(Task.TaskStatus.OPEN);
         DbService.ofy().save().entities(task).now();
         
         title = "Write 10 pages for your Math research project";
-        desc = "Decide on a subject and read some literature. You can ask Mom for advice";
+        desc = "Decide on a subject and read some literature. You can ask Mom for advice. ";
         task = new Task(title, desc, 100);
         task.setStatus(Task.TaskStatus.OPEN);
         DbService.ofy().save().entities(task).now();
         
-        title = "Visit Grandma";
-        desc = "Bring her a small gift, maybe some flowers or chocolates.";
+        title = "Visit Grandma at the hospital";
+        desc = "Bring her a small gift, maybe some flowers or chocolates. Ask her about her cats, she's always happy to talk about them.";
         task = new Task(title, desc, 70);
         task.setStatus(Task.TaskStatus.OPEN);
         DbService.ofy().save().entities(task).now();
         
         title = "Help your brother with his Physics homework";
-        desc = "He needs some help understanding the theory. Don't just give him the solution!";
+        desc = "He needs some help understanding the theory. Don't just give him the solution, he should find it himself!";
         task = new Task(title, desc, 30);
         task.setStatus(Task.TaskStatus.OPEN);
         DbService.ofy().save().entities(task).now();
